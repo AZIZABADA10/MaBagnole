@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Location de Voiture - Simple et Abordable</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="Assets/logos/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="font-sans">
@@ -16,9 +17,9 @@
                     <img src="Assets/logos/logo.png" alt="logo mabagnole" class="w-22 h-16"></i>
                 </a>
                 <div class="hidden md:flex space-x-6">
-                    <a href="#" class="text-gray-700 hover:text-blue-600">Accuiel</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600">Nos voitures</a>
-                    <a href="#" class="text-gray-700 hover:text-blue-600">À propos</a>
+                    <a href="index.php" class="text-gray-700 hover:text-blue-600">Accuiel</a>
+                    <a href="nos_voitures.php" class="text-gray-700 hover:text-blue-600">Nos voitures</a>
+                    <a href="a_propos.php" class="text-gray-700 hover:text-blue-600">À propos</a>
                 </div>
             </div>
             <div class="flex items-center space-x-4">
