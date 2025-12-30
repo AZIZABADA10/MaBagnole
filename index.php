@@ -23,12 +23,12 @@
                 </div>
             </div>
             <div class="flex items-center space-x-4">
-                <button class="px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50">
+                <a href="login.php" class="px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 inline-block text-center">
                     Connexion
-                </button>
-                <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                </a>
+                <a href="register.php" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-block text-center">
                     Inscription
-                </button>
+                </a>
             </div>
         </nav>
     </header>

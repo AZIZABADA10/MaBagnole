@@ -17,7 +17,6 @@
             <p class="text-gray-500 text-sm">Rejoignez MaBagnole</p>
         </div>
 
-        <!-- Form -->
         <form class="space-y-5">
             <div>
                 <label class="text-sm font-medium text-gray-600">Nom complet</label>
@@ -31,7 +30,6 @@
                     class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none">
             </div>
 
-            <!-- Role (optionnel côté UI, souvent caché côté backend) -->
             <div>
                 <label class="text-sm font-medium text-gray-600">Type de compte</label>
                 <select
