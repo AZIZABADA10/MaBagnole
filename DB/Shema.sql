@@ -1,19 +1,20 @@
-create database mabagnole;
+CREATE DATABASE mabagnole;
+use mabagnole;
 
 create table utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
     nom varchar(50),
-    email varchar(200),
+    email varchar(200) unique,
     `role` enum('admin', 'client') default 'client'
 );
 
 create table categorie (
     id_categorie int PRIMARY key AUTO_INCREMENT,
-    titre: varchar(50),
+    titre varchar(50),
     `description` text
 );
 
-create vehicule (
+create table vehicule (
     id_vehicule INT PRIMARY KEY AUTO_INCREMENT,
     modele varchar(40),
     marque varchar(40),
@@ -27,8 +28,8 @@ create vehicule (
 
 
 CREATE TABLE reservation (
-    id_utilisateur INT UNSIGNED,
-    id_vehicule INT UNSIGNED,
+    id_utilisateur INT,
+    id_vehicule INT,
     date_debut DATE,
     date_fin DATE,
     statut_reservation ENUM('en_attente', 'confirmee', 'annulee') DEFAULT 'en_attente',
@@ -39,8 +40,8 @@ CREATE TABLE reservation (
 
 
 create table avis (
-    id_utilisateur INT UNSIGNED,
-    id_vehicule INT UNSIGNED,
+    id_utilisateur INT,
+    id_vehicule INT,
     commentaire text,
     date_avis date,
     PRIMARY KEY (id_utilisateur,id_vehicule),
