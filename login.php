@@ -1,3 +1,21 @@
+<?php
+session_start();
+require_once __DIR__ . '/vendor/autoload.php';
+use App\Classes\Auth;
+
+$errorMessage = '';
+
+if (isset($_POST['connecter'])) {
+    $result = Auth::login($_POST['email'], $_POST['mot_de_passe']);
+
+    if (!$result['success']) {
+        $errorMessage = $result['message'];
+    } else {
+        header('Location: Pages/Admin/dashboard.php');
+        exit();
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,22 +34,26 @@
             <h1 class="text-2xl font-bold text-blue-600">Connexion</h1>
             <p class="text-gray-500 text-sm">Accédez à votre compte</p>
         </div>
-
+         <?php if (!empty($errorMessage)) : ?>
+            <div class="mb-4 p-3 text-red-700 bg-red-100 border border-red-400 rounded">
+                <?php echo $errorMessage; ?>
+            </div>
+        <?php endif; ?>
         <!-- Form -->
-        <form class="space-y-5">
+        <form class="space-y-5" action="login.php" method="POST">
             <div>
                 <label class="text-sm font-medium text-gray-600">Email</label>
-                <input type="email" placeholder="exemple@email.com"
+                <input type="email" name="email" placeholder="exemple@email.com"
                     class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none">
             </div>
 
             <div>
                 <label class="text-sm font-medium text-gray-600">Mot de passe</label>
-                <input type="password" placeholder="••••••••"
+                <input type="password" name="mot_de_passe" placeholder="••••••••"
                     class="w-full mt-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 outline-none">
             </div>
 
-            <button
+            <button name="connecter"
                 class="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition">
                 Se connecter
             </button>
