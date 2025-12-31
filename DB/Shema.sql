@@ -5,6 +5,7 @@ create table utilisateur (
     id_utilisateur INT PRIMARY KEY AUTO_INCREMENT,
     nom varchar(50),
     email varchar(200) unique,
+    mot_de_passe varchar(256),
     `role` enum('admin', 'client') default 'client'
 );
 
