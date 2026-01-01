@@ -26,6 +26,7 @@ if (isset($_POST['inscrire'])) {
     <title>Inscription | MaBagnole</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="shortcut icon" href="Assets/logos/logo.png" type="image/x-icon">
 </head>
 
 <body class="min-h-screen bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700 flex items-center justify-center">
