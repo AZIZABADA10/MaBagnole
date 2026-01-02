@@ -49,3 +49,15 @@ create table avis (
     FOREIGN KEY (id_utilisateur) REFERENCES utilisateur(id_utilisateur),
     FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule)
 );
+
+
+/* vue sur la base de donnée pour lister les vehicule*/
+
+CREATE VIEW ListeVehicules AS
+SELECT 
+    v.id_vehicule,v.modele,v.marque,v.prix_par_jour,v.disponible,c.titre AS categorie,
+    COUNT(a.id_vehicule) AS nb_avis
+FROM vehicule v
+JOIN categorie c ON v.id_categorie = c.id_categorie
+LEFT JOIN avis a ON v.id_vehicule = a.id_vehicule
+GROUP BY v.id_vehicule;
