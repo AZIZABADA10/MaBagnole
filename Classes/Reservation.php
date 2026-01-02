@@ -1,20 +1,61 @@
 <?php
 
 namespace App\Classes;
+
 use App\Config\Database;
 use PDO;
 
 class Reservation
 {
-    public function ajouter($id_user, $id_vehicule, $date_debut, $date_fin): bool
+    private int $id_utilisateur;
+    private int $id_vehicule;
+    private string $date_debut;
+    private string $date_fin;
+    private string $statut_reservation;
+
+    public function __construct(int $id_utilisateur,int $id_vehicule,string $date_debut,string $date_fin,string $statut_reservation = 'en_attente') 
     {
-        $db = Database::getConnexion();
+        $this->id_utilisateur = $id_utilisateur;
+        $this->id_vehicule = $id_vehicule;
+        $this->date_debut = $date_debut;
+        $this->date_fin = $date_fin;
+        $this->statut_reservation = $statut_reservation;
+    }
+
+
+    public function ajouterReservation(): bool
+    {
         $sql = "CALL AjouterReservation(?,?,?,?)";
-        return $db->prepare($sql)->execute([
-            $id_user,
-            $id_vehicule,
-            $date_debut,
-            $date_fin
-        ]);
+        return Database::getConnexion()->prepare($sql)->execute([$this->id_utilisateur,$this->id_vehicule,$this->date_debut,$this->date_fin]);
+    }
+
+
+    public function modifierReservation(string $nouvelle_date_debut,string $nouvelle_date_fin): bool 
+    {
+        $sql = "UPDATE reservation SET
+                    date_debut = :date_debut,
+                    date_fin = :date_fin
+                WHERE id_utilisateur = :id_user
+                  AND id_vehicule = :id_vehicule";
+
+        return Database::getConnexion()->prepare($sql)->execute([':date_debut' => $nouvelle_date_debut,':date_fin' => $nouvelle_date_fin,':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
+    }
+
+    public function annulerReservation(): bool
+    {
+        $sql = "UPDATE reservation SET
+                    statut_reservation = 'annulee'
+                WHERE id_utilisateur = :id_user
+                  AND id_vehicule = :id_vehicule";
+        return Database::getConnexion()->prepare($sql)->execute([':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
+    }
+
+    public function confirmerReservation(): bool
+    {
+        $sql = "UPDATE reservation SET
+                    statut_reservation = 'confirmee'
+                WHERE id_utilisateur = :id_user
+                  AND id_vehicule = :id_vehicule";
+        return Database::getConnexion()->prepare($sql)->execute([':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
     }
 }
