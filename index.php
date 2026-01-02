@@ -21,28 +21,7 @@ $categories = Categorie::listerCategorie();
 </head>
 <body class="font-sans">
     <!-- Header -->
-    <header class="bg-white shadow-sm">
-        <nav class="container mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-8">
-                <a href="#" class="text-2xl font-bold text-blue-600">
-                    <img src="Assets/logos/logo.png" alt="logo mabagnole" class="w-22 h-16"></i>
-                </a>
-                <div class="hidden md:flex space-x-6">
-                    <a href="index.php" class="text-gray-700 hover:text-blue-600">Accuiel</a>
-                    <a href="nos_voitures.php" class="text-gray-700 hover:text-blue-600">Nos voitures</a>
-                    <a href="a_propos.php" class="text-gray-700 hover:text-blue-600">À propos</a>
-                </div>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="login.php" class="px-4 py-2 text-blue-600 border border-blue-600 rounded-lg hover:bg-blue-50 inline-block text-center">
-                    Connexion
-                </a>
-                <a href="register.php" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 inline-block text-center">
-                    Inscription
-                </a>
-            </div>
-        </nav>
-    </header>
+        <?php require_once 'Components/header.php';?>
 
     <!-- Hero Section -->
     <section class="relative py-40 overflow-hidden">
@@ -221,45 +200,7 @@ $categories = Categorie::listerCategorie();
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">
-                       <img src="Assets/logos/logo.png" alt="logo mabagnole" class="w-22 h-16"></i>
-                    </h3>
-                    <p class="text-gray-400 text-sm">Location de voitures simple et abordable au Maroc</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Qui sommes-nous</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white">Notre équipe</a></li>
-                        <li><a href="#" class="hover:text-white">Nos valeurs</a></li>
-                        <li><a href="#" class="hover:text-white">Carrières</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Nos services</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white">Location courte durée</a></li>
-                        <li><a href="#" class="hover:text-white">Location longue durée</a></li>
-                        <li><a href="#" class="hover:text-white">Chauffeur privé</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold mb-4">Besoin d'aide ?</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white">Centre d'aide</a></li>
-                        <li><a href="#" class="hover:text-white">Contact</a></li>
-                        <li><a href="#" class="hover:text-white">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2026 Rental. Tous droits réservés.</p>
-            </div>
-        </div>
-    </footer>
+    <?php require_once 'Components/footer.php';?>
+    
 </body>
 </html>
