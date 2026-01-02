@@ -61,3 +61,19 @@ FROM vehicule v
 JOIN categorie c ON v.id_categorie = c.id_categorie
 LEFT JOIN avis a ON v.id_vehicule = a.id_vehicule
 GROUP BY v.id_vehicule;
+
+/*procédure stoke*/
+DELIMITER $$
+
+CREATE PROCEDURE AjouterReservation(
+    IN p_id_utilisateur INT,
+    IN p_id_vehicule INT,
+    IN p_date_debut DATE,
+    IN p_date_fin DATE
+)
+BEGIN
+    INSERT INTO reservation (id_utilisateur, id_vehicule, date_debut, date_fin, statut_reservation)
+    VALUES (p_id_utilisateur, p_id_vehicule, p_date_debut, p_date_fin, 'en_attente');
+END $$
+
+DELIMITER ;

@@ -10,15 +10,21 @@ if (isset($_POST['connecter'])) {
 
     if (!$result['success']) {
         $errorMessage = $result['message'];
-    } else if ($_SESSION['user']['role'] === 'admin'){
-        header('Location: Pages/Admin/dashboard.php');
-        exit();
-    }else{
-       header('Location: Pages/Client/index.php');
-        exit(); 
+    } else {
+
+        $role = $_SESSION['user']['role'] ?? 'client';
+
+
+        if ($role === 'admin') {
+            header('Location: Pages/Admin/dashboard.php');
+            exit();
+        } else {
+            header('Location: reserver.php');
+        }
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

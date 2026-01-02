@@ -4,8 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 use App\Classes\Vehicule;
 use App\Classes\Categorie;
 
-// Récupérer tous les véhicules disponibles
-$vehicules = Vehicule::listerVehicule(100, 0); // Ajuste le limit si nécessaire
+$vehicules = Vehicule::listerVehicule(8, 0); 
 $categories = Categorie::listerCategorie();
 ?>
 
