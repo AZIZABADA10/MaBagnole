@@ -1,3 +1,13 @@
+<?php
+require_once __DIR__ . '/vendor/autoload.php';
+
+use App\Classes\Vehicule;
+use App\Classes\Categorie;
+
+$vehicules = Vehicule::listerVehicule(4, 0);
+$categories = Categorie::listerCategorie();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,6 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Location de Voiture - Simple et Abordable</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="Assets/logos/logo.png" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -155,107 +166,50 @@
 
     <!-- Popular Cars Section -->
     <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-4">Trouvez la voiture qui vous convient en consultant notre</h2>
-            <p class="text-center text-gray-600 mb-12">parc dans les Marchés suivants</p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <!-- Car Card 1 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400" alt="Mercedes C-Class" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-1">Mercedes C-Class</h3>
-                        <p class="text-gray-500 text-sm mb-3">Berline</p>
-                        <div class="flex items-center justify-between mb-3 text-sm text-gray-600">
-                            <span><i class="fas fa-users"></i> 4 places</span>
-                            <span><i class="fas fa-cog"></i> Auto</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-2xl font-bold text-blue-600">450 DH</span>
-                                <span class="text-gray-500 text-sm">/jour</span>
-                            </div>
-                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
-                                Louer
-                            </button>
-                        </div>
-                    </div>
-                </div>
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl font-bold text-center mb-4">
+            Trouvez la voiture qui vous convient en consultant notre
+        </h2>
+        <p class="text-center text-gray-600 mb-12">parc dans les Marchés suivants</p>
 
-                <!-- Car Card 2 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=400" alt="BMW Série 3" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-1">BMW Série 3</h3>
-                        <p class="text-gray-500 text-sm mb-3">Berline Sport</p>
-                        <div class="flex items-center justify-between mb-3 text-sm text-gray-600">
-                            <span><i class="fas fa-users"></i> 4 places</span>
-                            <span><i class="fas fa-cog"></i> Auto</span>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <?php foreach ($vehicules as $v):
+                $catNom = '';
+                foreach ($categories as $c) {
+                    if ($c['id_categorie'] == $v['id_categorie']) {
+                        $catNom = $c['titre'];
+                        break;
+                    }
+                }
+            ?>
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
+                <img src="<?= htmlspecialchars($v['image']) ?>" 
+                     alt="<?= htmlspecialchars($v['modele']) ?>" 
+                     class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-bold text-lg mb-1"><?= htmlspecialchars($v['modele']) ?></h3>
+                    <p class="text-gray-500 text-sm mb-3"><?= htmlspecialchars($catNom) ?></p>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-2xl font-bold text-blue-600"><?= number_format($v['prix_par_jour'], 0, ',', ' ') ?> DH</span>
+                            <span class="text-gray-500 text-sm">/jour</span>
                         </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-2xl font-bold text-blue-600">480 DH</span>
-                                <span class="text-gray-500 text-sm">/jour</span>
-                            </div>
-                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
-                                Louer
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Car Card 3 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                    <img src="https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=400" alt="Audi A4" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-1">Audi A4</h3>
-                        <p class="text-gray-500 text-sm mb-3">Berline Premium</p>
-                        <div class="flex items-center justify-between mb-3 text-sm text-gray-600">
-                            <span><i class="fas fa-users"></i> 5 places</span>
-                            <span><i class="fas fa-cog"></i> Auto</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-2xl font-bold text-blue-600">420 DH</span>
-                                <span class="text-gray-500 text-sm">/jour</span>
-                            </div>
-                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
-                                Louer
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Car Card 4 -->
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                    <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?w=400" alt="Porsche 911" class="w-full h-48 object-cover">
-                    <div class="p-4">
-                        <h3 class="font-bold text-lg mb-1">Porsche 911</h3>
-                        <p class="text-gray-500 text-sm mb-3">Sport</p>
-                        <div class="flex items-center justify-between mb-3 text-sm text-gray-600">
-                            <span><i class="fas fa-users"></i> 2 places</span>
-                            <span><i class="fas fa-cog"></i> Auto</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <span class="text-2xl font-bold text-blue-600">1200 DH</span>
-                                <span class="text-gray-500 text-sm">/jour</span>
-                            </div>
-                            <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
-                                Louer
-                            </button>
-                        </div>
+                        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
+                            Louer
+                        </button>
                     </div>
                 </div>
             </div>
-
-            <div class="text-center mt-8">
-                <button class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50">
-                    Afficher tous les véhicules
-                </button>
-            </div>
+            <?php endforeach; ?>
         </div>
-    </section>
+
+        <div class="text-center mt-8">
+            <a href="nos_voitures.php" class="px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                Afficher tous les véhicules
+            </a>
+        </div>
+    </div>
+</section>
 
     <!-- Morocco Map Section -->
     <section class="py-16 bg-blue-50">
