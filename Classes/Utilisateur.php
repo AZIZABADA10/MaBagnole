@@ -4,53 +4,31 @@ namespace App\Classes;
 use App\Config\Database;
 use PDO;
 
-class Utilisateur 
+abstract class Utilisateur
 {
-
     protected int $id_utilisateur;
     protected string $nom;
-    protected string $email;	
+    protected string $email;
+    protected string $mot_de_passe;
     protected string $role;
 
-    public function __construct($id_utilisateur,$nom,$email,$role)
+    public function __construct($nom, $email, $mot_de_passe, $role = 'client')
     {
-        $this->id_utilisateur = $id_utilisateur ;
-        $this->nom = $nom ;
+        $this->nom = $nom;
         $this->email = $email;
+        $this->mot_de_passe = password_hash($mot_de_passe, PASSWORD_DEFAULT);
         $this->role = $role;
     }
 
-    public function getIdItilisateur(): int
+    public function seConnecter($email, $mot_de_passe): bool
     {
-        return $this->id_utilisateur;
-    }
-    public function getNom(): string
-    {
-        return $this->nom;
-    }
-    public function getEmail(): string
-    {
-        return $this->email;
-    }
-    public function getRole(): string
-    {
-        return $this->role;
-    }
-    public function setNom(string $newNom): void
-    {
-        $this->nom = $newNom;
-    }
-    public function setEmail(string $newEmail): void
-    {
-        $this->email = $newEmail;
-    }
-    public function setRole(stirng $newRole): void
-    {
-        $this->role = $newRole ;
-    }
+        $db = Database::getConnexion();
+        $sql = "SELECT * FROM utilisateur WHERE email = ?";
+        $stmt = $db->prepare($sql);
+        $stmt->execute([$email]);
 
+        $user = $stmt->fetch();
+
+        return $user && password_verify($mot_de_passe, $user['mot_de_passe']);
+    }
 }
-
-
-
-

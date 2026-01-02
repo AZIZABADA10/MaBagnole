@@ -6,14 +6,24 @@ use App\Classes\Utilisateur;
 use PDO;
 
 
-class Client extends Utilisateur 
+class Client extends Utilisateur
 {
-    public function __construct($id_utilisateur,$nom,$email,$role)
+    public function sInscrire(): bool
     {
-        parent:: __construct($id_utilisateur,$nom,$email,$role);
-    }
+        $db = Database::getConnexion();
 
+        $sql = "INSERT INTO utilisateur (nom, email, mot_de_passe, `role`)
+                VALUES (?, ?, ?, 'client')";
+        $stmt = $db->prepare($sql);
+
+        return $stmt->execute([
+            $this->nom,
+            $this->email,
+            $this->mot_de_passe
+        ]);
+    }
 }
+
 
 
 
