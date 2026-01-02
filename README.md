@@ -36,7 +36,7 @@ Ce projet a été réalisé dans le cadre de la formation **Développeur Web et 
 ---
 
 ## Page D'accuiel
-![alt text](UI/accuiel.png)
+![Page d'accuiel](UI/accuiel.png)
 
 ## Fonctionnalités développées
 
