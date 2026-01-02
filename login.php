@@ -1,18 +1,21 @@
 <?php
 session_start();
 require_once __DIR__ . '/vendor/autoload.php';
-use App\Classes\Auth;
+use App\Classes\Utilisateur;
 
 $errorMessage = '';
 
 if (isset($_POST['connecter'])) {
-    $result = Auth::login($_POST['email'], $_POST['mot_de_passe']);
+    $result = Utilisateur::login($_POST['email'], $_POST['mot_de_passe']);
 
     if (!$result['success']) {
         $errorMessage = $result['message'];
-    } else {
+    } else if ($_SESSION['user']['role'] === 'admin'){
         header('Location: Pages/Admin/dashboard.php');
         exit();
+    }else{
+       header('Location: Pages/Client/index.php');
+        exit(); 
     }
 }
 ?>
