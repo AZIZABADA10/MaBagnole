@@ -35,6 +35,9 @@ Ce projet a été réalisé dans le cadre de la formation **Développeur Web et 
 
 ---
 
+## Page D'accuiel
+![alt text](UI/accuiel.png)
+
 ## Fonctionnalités développées
 
 ### Côté Client
@@ -98,5 +101,4 @@ Ces diagrammes ont permis de structurer le projet avant la phase de développeme
 
 ## Réalisé par
 - **Nom :** Aziz Abada
-- **Encadrant :** M. Achraf
 - **Année :** 2025 – 2026
