@@ -26,7 +26,7 @@ class Reservation
     public function ajouterReservation(): bool
     {
         $sql = "CALL AjouterReservation(?,?,?,?)";
-        return Database::getConnexion()->prepare($sql)->execute([$this->id_utilisateur,$this->id_vehicule,$this->date_debut,$this->date_fin]);
+        return Database::getInstance()->getConnexion()->prepare($sql)->execute([$this->id_utilisateur,$this->id_vehicule,$this->date_debut,$this->date_fin]);
     }
 
 
@@ -38,7 +38,7 @@ class Reservation
                 WHERE id_utilisateur = :id_user
                   AND id_vehicule = :id_vehicule";
 
-        return Database::getConnexion()->prepare($sql)->execute([':date_debut' => $nouvelle_date_debut,':date_fin' => $nouvelle_date_fin,':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
+        return Database::getInstance()->getConnexion()->prepare($sql)->execute([':date_debut' => $nouvelle_date_debut,':date_fin' => $nouvelle_date_fin,':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
     }
 
     public function annulerReservation(): bool
@@ -47,7 +47,7 @@ class Reservation
                     statut_reservation = 'annulee'
                 WHERE id_utilisateur = :id_user
                   AND id_vehicule = :id_vehicule";
-        return Database::getConnexion()->prepare($sql)->execute([':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
+        return Database::getInstance()->getConnexion()->prepare($sql)->execute([':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
     }
 
     public function confirmerReservation(): bool
@@ -56,6 +56,6 @@ class Reservation
                     statut_reservation = 'confirmee'
                 WHERE id_utilisateur = :id_user
                   AND id_vehicule = :id_vehicule";
-        return Database::getConnexion()->prepare($sql)->execute([':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
+        return Database::getInstance()->getConnexion()->prepare($sql)->execute([':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
     }
 }

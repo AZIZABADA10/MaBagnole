@@ -1,13 +1,14 @@
 <?php
 session_start();
 require_once __DIR__ . '/vendor/autoload.php';
-use App\Classes\Auth;
+
+use App\Classes\Client;
 
 
 $errorMessage = '';
 
 if (isset($_POST['inscrire'])) {
-    $result = Auth::register($_POST['nom'],$_POST['email'],$_POST['mot_de_passe']);
+    $result = Client::register($_POST['nom'],$_POST['email'],$_POST['mot_de_passe']);
 
     if (!$result['success']) {
         $errorMessage = $result['message'];

@@ -24,7 +24,7 @@ class Avis
         $sql = "INSERT INTO avis (id_utilisateur, id_vehicule, commentaire, date_avis)
                 VALUES (?, ?, ?, NOW())";
 
-        return Database::getConnexion()->prepare($sql)->execute([$this->id_utilisateur,$this->id_vehicule,$this->commentaire]);
+        return Database::getInstance()->getConnexion()->prepare($sql)->execute([$this->id_utilisateur,$this->id_vehicule,$this->commentaire]);
     }
 
 
@@ -34,7 +34,7 @@ class Avis
                 SET commentaire = '[supprimé]' 
                 WHERE id_utilisateur = ? AND id_vehicule = ?";
 
-        return Database::getConnexion()->prepare($sql)->execute([$this->id_utilisateur,$this->id_vehicule]);
+        return Database::getInstance()->getConnexion()->prepare($sql)->execute([$this->id_utilisateur,$this->id_vehicule]);
     }
 
 
@@ -44,6 +44,6 @@ class Avis
                 SET commentaire = ? 
                 WHERE id_utilisateur = ? AND id_vehicule = ?";
 
-        return Database::getConnexion()->prepare($sql)->execute([$newCommentaire,$this->id_utilisateur,$this->id_vehicule]);
+        return Database::getInstance()->getConnexion()->prepare($sql)->execute([$newCommentaire,$this->id_utilisateur,$this->id_vehicule]);
     }
 }
