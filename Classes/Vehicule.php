@@ -1,24 +1,96 @@
 <?php
 
 namespace App\Classes;
+
 use App\Config\Database;
 use PDO;
 
 class Vehicule
 {
-    public function lister($limit, $offset): array
+    private ?int $id_vehicule;
+    private string $modele;
+    private string $marque;
+    private float $prix_par_jour;
+    private bool $disponible;
+    private string $image;
+    private int $id_categorie;
+
+    public function __construct(string $modele,string $marque,float $prix_par_jour,int $id_categorie,string $image,bool $disponible = true,?int $id_vehicule = null) 
     {
-        $sql = "SELECT * FROM vehicule LIMIT ? OFFSET ?";
-        $stmt = Database::getConnexion()->prepare($sql);
-        $stmt->execute([$limit, $offset]);
-        return $stmt->fetchAll();
+        $this->id_vehicule = $id_vehicule;
+        $this->modele = $modele;
+        $this->marque = $marque;
+        $this->prix_par_jour = $prix_par_jour;
+        $this->id_categorie = $id_categorie;
+        $this->image = $image;
+        $this->disponible = $disponible;
     }
 
-    public function filtrerParCategorie($id_categorie): array
+    public function ajouterVehicule(): bool
     {
-        $sql = "SELECT * FROM vehicule WHERE id_categorie = ?";
+        $sql = "INSERT INTO vehicule 
+                (modele, marque, prix_par_jour, disponible, image, id_categorie)
+                VALUES (:modele, :marque, :prix, :disponible, :image, :categorie)";
+
         $stmt = Database::getConnexion()->prepare($sql);
-        $stmt->execute([$id_categorie]);
-        return $stmt->fetchAll();
+
+        return $stmt->execute([
+            ':modele' => $this->modele,
+            ':marque' => $this->marque,
+            ':prix' => $this->prix_par_jour,
+            ':disponible' => $this->disponible,
+            ':image' => $this->image,
+            ':categorie' => $this->id_categorie
+        ]);
+    }
+
+    public function modifierVehicule(): bool
+    {
+        $sql = "UPDATE vehicule SET
+                    modele = :modele,
+                    marque = :marque,
+                    prix_par_jour = :prix,
+                    disponible = :disponible,
+                    id_categorie = :categorie
+                WHERE id_vehicule = :id";
+
+        $stmt = Database::getConnexion()->prepare($sql);
+
+        return $stmt->execute([
+            ':modele' => $this->modele,
+            ':marque' => $this->marque,
+            ':prix' => $this->prix_par_jour,
+            ':disponible' => $this->disponible,
+            ':categorie' => $this->id_categorie,
+            ':id' => $this->id_vehicule
+        ]);
+    }
+
+    public function supprimer(): bool
+    {
+        $sql = "DELETE FROM vehicule WHERE id_vehicule = :id";
+        return Database::getConnexion()
+            ->prepare($sql)
+            ->execute([':id' => $this->id_vehicule]);
+    }
+
+    public static function listerVehicule(int $limit, int $offset): array
+    {
+        $sql = "SELECT * FROM vehicule LIMIT :`limit` OFFSET :offset";
+        $stmt = Database::getConnexion()->prepare($sql);
+        $stmt->bindValue(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function filtrerVehiculeParCategorie(int $id_categorie): array
+    {
+        $sql = "SELECT * FROM vehicule WHERE id_categorie = :categorie";
+        $stmt = Database::getConnexion()->prepare($sql);
+        $stmt->execute([':categorie' => $id_categorie]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
