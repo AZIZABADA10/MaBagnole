@@ -18,26 +18,24 @@ class Categorie
         $this->description = $description;
     }
 
-    public function ajouter(): bool
+    public function ajouterCategorie(): bool
     {
         $sql = "INSERT INTO categorie (titre, description)
                 VALUES (:titre, :description)";
 
-        return Database::getConnexion()
-            ->prepare($sql)
+        return Database::getInstance()->getConnexion()->prepare($sql)
             ->execute([
                 ':titre' => $this->titre,
                 ':description' => $this->description
             ]);
     }
 
-    public function modifier(): bool
+    public function modifierCategorie(): bool
     {
         $sql = "UPDATE categorie SET titre=:titre, description=:description
                 WHERE id_categorie=:id";
 
-        return Database::getConnexion()
-            ->prepare($sql)
+        return Database::getInstance()->getConnexion()->prepare($sql)
             ->execute([
                 ':titre' => $this->titre,
                 ':description' => $this->description,
@@ -45,16 +43,16 @@ class Categorie
             ]);
     }
 
-    public function supprimer(): bool
+    public function supprimerCategorie(): bool
     {
-        return Database::getConnexion()
+        return Database::getInstance()->getConnexion()
             ->prepare("DELETE FROM categorie WHERE id_categorie=:id")
             ->execute([':id' => $this->id_categorie]);
     }
 
-    public static function lister(): array
+    public static function listerCategorie(): array
     {
-        return Database::getConnexion()
+        return Database::getInstance()->getConnexion()
             ->query("SELECT * FROM categorie ORDER BY titre")
             ->fetchAll(PDO::FETCH_ASSOC);
     }
