@@ -49,12 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date_fin = $_POST['date_fin'] ?? '';
 
     if ($date_debut && $date_fin) {
-        $reservation = new Reservation(
-            $_SESSION['user']['id'],
-            $vehicule_id,
-            $date_debut,
-            $date_fin
-        );
+        $reservation = new Reservation($_SESSION['user']['id'],$vehicule_id,$date_debut,$date_fin);
 
         if ($reservation->ajouterReservation()) {
             $success = "Votre réservation a été enregistrée avec succès !";
@@ -123,10 +118,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 mt-16 text-center text-sm text-gray-400">
-        &copy; 2026 MaBagnole. Tous droits réservés.
-    </footer>
+    
+    <?php require_once 'Components/footer.php';?>
 
 </body>
 </html>

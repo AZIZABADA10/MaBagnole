@@ -19,7 +19,8 @@ if (isset($_POST['connecter'])) {
             header('Location: Pages/Admin/dashboard.php');
             exit();
         } else {
-            header('Location: reserver.php');
+            header('Location: espace_client.php');
+            
         }
     }
 }

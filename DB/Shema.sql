@@ -66,10 +66,10 @@ GROUP BY v.id_vehicule;
 DELIMITER $$
 
 CREATE PROCEDURE AjouterReservation(
-    IN p_id_utilisateur INT,
-    IN p_id_vehicule INT,
-    IN p_date_debut DATE,
-    IN p_date_fin DATE
+IN p_id_utilisateur INT,
+IN p_id_vehicule INT,
+IN p_date_debut DATE,
+IN p_date_fin DATE
 )
 BEGIN
     INSERT INTO reservation (id_utilisateur, id_vehicule, date_debut, date_fin, statut_reservation)
