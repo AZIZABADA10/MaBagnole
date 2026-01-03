@@ -79,9 +79,9 @@ $vehicules = Vehicule::listerVehicule(100, 0);
             <tr>
                 <td class="px-6 py-4 text-sm text-gray-700"><?= $v['id_vehicule'] ?></td>
                 <td class="px-6 py-4 text-sm text-gray-700">
-<img src="<?= htmlspecialchars($v['image']) ?>" 
-     class="w-16 h-12 object-cover rounded" 
-     alt="<?= htmlspecialchars($v['modele']) ?>">
+                    <img src="<?= htmlspecialchars($v['image']) ?>" 
+                        class="w-16 h-12 object-cover rounded" 
+                        alt="<?= htmlspecialchars($v['modele']) ?>">
                 </td>
                 <td class="px-6 py-4 text-sm text-gray-700"><?= htmlspecialchars($v['modele']) ?></td>
                 <td class="px-6 py-4 text-sm text-gray-700"><?= htmlspecialchars($v['marque']) ?></td>
