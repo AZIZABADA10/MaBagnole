@@ -49,8 +49,9 @@ abstract class Utilisateur
         $_SESSION['user'] = [
             'id'   => $user['id_utilisateur'],
             'nom'  => $user['nom'],
-            'role' => $user['role']
+            'role' => $user['role'] ?? 'client'  
         ];
+
 
         return [
             'success' => true,
