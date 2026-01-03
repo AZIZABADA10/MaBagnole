@@ -50,6 +50,7 @@ class Reservation
         return Database::getInstance()->getConnexion()->prepare($sql)->execute([':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
     }
 
+
     public function confirmerReservation(): bool
     {
         $sql = "UPDATE reservation SET
@@ -58,4 +59,35 @@ class Reservation
                   AND id_vehicule = :id_vehicule";
         return Database::getInstance()->getConnexion()->prepare($sql)->execute([':id_user' => $this->id_utilisateur,':id_vehicule' => $this->id_vehicule]);
     }
+
+    public static function listerReservationsParUtilisateur(int $id_utilisateur): array
+    {
+        $sql = "SELECT r.*, v.modele, v.prix_par_jour
+                FROM reservation r
+                JOIN vehicule v ON r.id_vehicule = v.id_vehicule
+                WHERE r.id_utilisateur = :id_user
+                ORDER BY r.date_debut DESC";
+
+        $stmt = Database::getInstance()->getConnexion()->prepare($sql);
+        $stmt->execute([':id_user' => $id_utilisateur]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function listerToutesLesReservations(): array
+    {
+        $sql = "SELECT r.*, 
+                    u.nom AS client_nom, u.email,
+                    v.modele
+                FROM reservation r
+                JOIN utilisateur u ON r.id_utilisateur = u.id_utilisateur
+                JOIN vehicule v ON r.id_vehicule = v.id_vehicule
+                ORDER BY r.date_debut DESC";
+
+        return Database::getInstance()
+            ->getConnexion()
+            ->query($sql)
+            ->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
 }
