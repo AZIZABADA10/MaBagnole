@@ -13,7 +13,8 @@ if (isset($_POST['inscrire'])) {
     if (!$result['success']) {
         $errorMessage = $result['message'];
     } else {
-        $errorMessage = $result['message'];
+        header('Location: login.php');
+        exit(); 
     }
 
 }
