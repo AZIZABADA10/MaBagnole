@@ -69,7 +69,7 @@ abstract class Utilisateur
 
     public static function listerUtilisateur(): array
     {
-        $sql = "SELECT * FROM utilisateur ORDER BY id_utilisateur DESC";
+        $sql = "SELECT * FROM utilisateur ";
         $stmt = Database::getInstance()->getConnexion()->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
