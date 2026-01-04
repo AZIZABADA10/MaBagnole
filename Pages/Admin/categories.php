@@ -5,13 +5,11 @@ require_once __DIR__ . '/../../vendor/autoload.php';
 use App\Config\Database;
 use App\Classes\Categorie;
 
-// Ajouter une catégorie simple
 if (isset($_POST['ajouter'])) {
     $categorie = new Categorie($_POST['titre'], $_POST['description']);
     $categorie->ajouterCategorie();
 }
 
-// Ajouter plusieurs catégories en masse
 if (isset($_POST['ajouter_multiple'])) {
     $titres = $_POST['titre'];
     $descriptions = $_POST['description'];
@@ -25,19 +23,17 @@ if (isset($_POST['ajouter_multiple'])) {
     }
 }
 
-// Modifier une catégorie
+
 if (isset($_POST['modifier'])) {
     $categorie = new Categorie($_POST['titre'], $_POST['description'], (int)$_POST['id']);
     $categorie->modifierCategorie();
 }
 
-// Supprimer une catégorie
 if (isset($_GET['supprimer'])) {
     $categorie = new Categorie('', '', (int)$_GET['supprimer']);
     $categorie->supprimerCategorie();
 }
 
-// Lister les catégories
 $categories = Categorie::listerCategorie();
 ?>
 

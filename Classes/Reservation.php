@@ -83,10 +83,7 @@ class Reservation
                 JOIN vehicule v ON r.id_vehicule = v.id_vehicule
                 ORDER BY r.date_debut DESC";
 
-        return Database::getInstance()
-            ->getConnexion()
-            ->query($sql)
-            ->fetchAll(PDO::FETCH_ASSOC);
+        return Database::getInstance()->getConnexion()->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
