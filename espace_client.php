@@ -53,7 +53,6 @@ if (isset($_POST['modifier'])) {
         <div class="hidden md:flex space-x-6">
                 <a href="index.php" class="text-gray-700 hover:text-blue-600">Accueil</a>
                 <a href="nos_voitures.php" class="text-gray-700 hover:text-blue-600">Nos voitures</a>
-                <a href="a_propos.php" class="text-gray-700 hover:text-blue-600">À propos</a>
             </div>
         <a href="logout.php"
                    class="px-4 py-2 border border-red-600 text-red-600 rounded-lg hover:bg-red-50">
