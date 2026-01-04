@@ -63,7 +63,7 @@ class Vehicule
             ':prix' => $this->prix_par_jour,
             ':disponible' => $this->disponible,
             ':categorie' => $this->id_categorie,
-            ':image' => $this->image, // ajouté
+            ':image' => $this->image, 
             ':id' => $this->id_vehicule
         ]);
     }
@@ -116,6 +116,7 @@ class Vehicule
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    
     public static function count(): int
     {
         $sql = "SELECT COUNT(*) FROM vehicule";
