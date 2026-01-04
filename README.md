@@ -37,6 +37,14 @@ Ce projet a été réalisé dans le cadre de la formation **Développeur Web et 
 
 ## Page D'accuiel
 ![Page d'accuiel](UI/accuiel.png)
+## Page Nos voiture
+![alt text](UI/nos_voiture.png)
+## Page tableau de board
+![alt text](UI/dashboard_admin.png)
+## Page gestion vehicule
+![alt text](UI/gestion_vehicule.png)
+## Page gestion categorie
+![alt text](UI/gestion_categorie.png)
 
 ## Fonctionnalités développées
 
