@@ -65,4 +65,12 @@ abstract class Utilisateur
         header('Location: index.php');
         exit();
     }
+
+
+    public static function listerUtilisateur(): array
+    {
+        $sql = "SELECT * FROM utilisateur ORDER BY id_utilisateur DESC";
+        $stmt = Database::getInstance()->getConnexion()->query($sql);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
