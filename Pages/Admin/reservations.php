@@ -1,14 +1,9 @@
 <?php
-session_start();
+
 require_once __DIR__ . '/../../vendor/autoload.php';
 
 use App\Classes\Reservation;
 
-
-if ($_SESSION['user']['role'] !== 'admin') {
-    header("Location: ../../login.php");
-    exit();
-}
 
 
 if (isset($_POST['confirmer'])) {
