@@ -95,4 +95,26 @@ class Vehicule
 
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+    public static function rechercher(string $motCle): array
+    {
+        $sql = "SELECT * FROM vehicule 
+                WHERE modele LIKE :mc OR marque LIKE :mc";
+        
+        $stmt = Database::getInstance()->getConnexion()->prepare($sql);
+        $stmt->execute([':mc' => "%$motCle%"]);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public static function count(): int
+    {
+        $sql = "SELECT COUNT(*) FROM vehicule";
+        return (int) Database::getInstance()
+            ->getConnexion()
+            ->query($sql)
+            ->fetchColumn();
+    }
+
+
 }
