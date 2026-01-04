@@ -58,44 +58,54 @@ $totalPages = ceil(Vehicule::count() / $limit);
 
 <!-- VEHICULES -->
 <section class="container mx-auto px-4 py-12">
-    <div id="vehiculesContainer"
-         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div id="vehiculesContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
 
         <?php foreach ($vehicules as $v): ?>
-            <div class="bg-white rounded-lg shadow hover:shadow-xl transition">
-                <img src="<?= htmlspecialchars($v['image']) ?>"
-                     class="w-full h-48 object-cover rounded-t-lg">
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                
+                <!-- Image avec effet zoom -->
+                <div class="h-52 overflow-hidden">
+                    <img src="<?= htmlspecialchars($v['image']) ?>" 
+                         alt="<?= htmlspecialchars($v['modele']) ?>"
+                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
 
-                <div class="p-4">
-                    <h3 class="font-bold text-lg">
-                        <?= htmlspecialchars($v['modele']) ?>
-                        <span class="text-xl font-bold text-blue-600">
+                <!-- Contenu -->
+                <div class="p-5 flex flex-col justify-between h-56">
+                    <div>
+                        <h3 class="font-semibold text-lg text-gray-800 mb-2">
+                            <?= htmlspecialchars($v['modele']) ?>
+                        </h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            <?= htmlspecialchars($v['marque']) ?>
+                        </p>
+                    </div>
+
+                    <!-- Prix et actions -->
+                    <div class="flex items-center justify-between mt-auto">
+                        <span class="text-2xl font-bold text-blue-600">
                             <?= number_format($v['prix_par_jour'], 0, ',', ' ') ?> DH
                         </span>
-                    </h3>
-                    
-                    <p class="text-gray-500 text-sm">
-                        <?= htmlspecialchars($v['marque']) ?>
-                    </p>
 
-                    <div class="flex justify-between items-center mt-4">
-                        
-
-                        <a href="reserver.php?id=<?= $v['id_vehicule'] ?>"
-                           class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                            Louer
-                        </a>
-                        <a href="vehicule.php?id=<?= $v['id_vehicule'] ?>"
-                            class="text-blue-600 text-sm hover:underline">
-                            Voir détails
-                        </a>
+                        <div class="flex flex-col gap-2">
+                            <a href="reserver.php?id=<?= $v['id_vehicule'] ?>"
+                               class="bg-blue-600 text-white px-5 py-2 rounded-xl font-medium text-sm text-center hover:bg-blue-700 transition">
+                                Louer
+                            </a>
+                            <a href="vehicule.php?id=<?= $v['id_vehicule'] ?>"
+                               class="text-blue-600 text-sm hover:underline text-center">
+                                Voir détails
+                            </a>
+                        </div>
                     </div>
                 </div>
+
             </div>
         <?php endforeach; ?>
 
     </div>
 </section>
+
 
 
 <div class="flex justify-center gap-2 pb-12">
