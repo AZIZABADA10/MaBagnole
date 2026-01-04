@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2026 Rental. Tous droits réservés.</p>
+                <p>&copy;YC 2026 Aziz Abada . Tous droits réservés.</p>
             </div>
         </div>
     </footer>
