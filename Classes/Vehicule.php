@@ -68,6 +68,15 @@ class Vehicule
         ]);
     }
 
+    public static function trouverVehiculeParId(int $id): ?array
+    {
+        $sql = "SELECT * FROM vehicule WHERE id_vehicule = ?";
+        $stmt = Database::getInstance()->getConnexion()->prepare($sql);
+        $stmt->execute([$id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
+    }
+
+
 
     public function supprimer(): bool
     {
@@ -115,6 +124,7 @@ class Vehicule
             ->query($sql)
             ->fetchColumn();
     }
+
 
 
 }

@@ -50,6 +50,8 @@ create table avis (
     FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule)
 );
 
+    
+
 
 /* vue sur la base de donnée pour lister les vehicule*/
 

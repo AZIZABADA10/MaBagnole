@@ -69,20 +69,25 @@ $totalPages = ceil(Vehicule::count() / $limit);
                 <div class="p-4">
                     <h3 class="font-bold text-lg">
                         <?= htmlspecialchars($v['modele']) ?>
+                        <span class="text-xl font-bold text-blue-600">
+                            <?= number_format($v['prix_par_jour'], 0, ',', ' ') ?> DH
+                        </span>
                     </h3>
-
+                    
                     <p class="text-gray-500 text-sm">
                         <?= htmlspecialchars($v['marque']) ?>
                     </p>
 
                     <div class="flex justify-between items-center mt-4">
-                        <span class="text-xl font-bold text-blue-600">
-                            <?= number_format($v['prix_par_jour'], 0, ',', ' ') ?> DH
-                        </span>
+                        
 
                         <a href="reserver.php?id=<?= $v['id_vehicule'] ?>"
                            class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
                             Louer
+                        </a>
+                        <a href="vehicule.php?id=<?= $v['id_vehicule'] ?>"
+                            class="text-blue-600 text-sm hover:underline">
+                            Voir détails
                         </a>
                     </div>
                 </div>
