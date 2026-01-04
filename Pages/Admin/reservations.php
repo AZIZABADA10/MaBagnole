@@ -21,7 +21,7 @@ if (isset($_POST['annuler'])) {
     $r->annulerReservation();
 }
 
-// Liste
+
 $reservations = Reservation::listerToutesLesReservations();
 ?>
 <?php
