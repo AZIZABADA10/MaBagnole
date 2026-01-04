@@ -1,3 +1,8 @@
+<?php
+session_start();
+$nom_admin = $_SESSION['user']['nom'];
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -100,15 +105,14 @@
         <!-- Profile -->
         <div class="relative group cursor-pointer">
           <div class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition">
-            <img src="https://i.pravatar.cc/40" class="w-9 h-9 rounded-full object-cover">
+            <img src="https://media.licdn.com/dms/image/v2/D4E03AQElm7ulvGwwmg/profile-displayphoto-crop_800_800/B4EZgFhiIBGcAI-/0/1752439336799?e=1769040000&v=beta&t=DCbs9vn7MfTkRKTp6ql521Zxsi6r3Lu6vpmsGcWPUhc" class="w-9 h-9 rounded-full object-cover">
             <div class="hidden md:block">
-              <p class="text-sm font-medium text-gray-800">Admin</p>
-              <p class="text-xs text-gray-500">Administrateur</p>
+              <p class="text-xl text-gray-500"><?=
+                
+                $nom_admin
+                ?>
+                </p>
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M19 9l-7 7-7-7"/>
-            </svg>
           </div>
 
         </div>

@@ -50,8 +50,10 @@ create table avis (
     FOREIGN KEY (id_vehicule) REFERENCES vehicule(id_vehicule)
 );
 
-    
 
+
+ALTER TABLE avis
+ADD COLUMN deleted_at DATETIME DEFAULT NULL;
 
 /* vue sur la base de donnée pour lister les vehicule*/
 

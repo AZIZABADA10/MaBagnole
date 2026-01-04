@@ -161,21 +161,37 @@ $categories = Categorie::listerCategorie();
                     }
                 }
             ?>
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition">
-                <img src="<?= htmlspecialchars($v['image']) ?>" 
-                     alt="<?= htmlspecialchars($v['modele']) ?>" 
-                     class="w-full h-48 object-cover">
-                <div class="p-4">
-                    <h3 class="font-bold text-lg mb-1"><?= htmlspecialchars($v['modele']) ?></h3>
-                    <p class="text-gray-500 text-sm mb-3"><?= htmlspecialchars($catNom) ?></p>
-                    <div class="flex items-center justify-between">
-                        <div>
+            <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <!-- Image -->
+                <div class="h-52 overflow-hidden">
+                    <img src="<?= htmlspecialchars($v['image']) ?>" 
+                        alt="<?= htmlspecialchars($v['modele']) ?>" 
+                        class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+
+                <!-- Contenu -->
+                <div class="p-5 flex flex-col justify-between h-56">
+                    <div>
+                        <h3 class="font-semibold text-xl mb-2 text-gray-800"><?= htmlspecialchars($v['modele']) ?></h3>
+                        <p class="text-gray-400 text-sm mb-4"><?= htmlspecialchars($catNom) ?></p>
+                    </div>
+
+                    <!-- Prix et actions -->
+                    <div class="flex items-center justify-between mt-auto">
+                        <div class="flex flex-col">
                             <span class="text-2xl font-bold text-blue-600"><?= number_format($v['prix_par_jour'], 0, ',', ' ') ?> DH</span>
-                            <span class="text-gray-500 text-sm">/jour</span>
+                            <span class="text-gray-400 text-sm">/jour</span>
                         </div>
-                        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm">
-                            Louer
-                        </button>
+                        <div class="flex flex-col gap-2">
+                            <a href="reserver.php?id=<?= $v['id_vehicule'] ?>"
+                            class="bg-blue-600 text-white px-5 py-2 rounded-xl font-medium text-sm text-center hover:bg-blue-700 transition">
+                                Louer
+                            </a>
+                            <a href="vehicule.php?id=<?= $v['id_vehicule'] ?>"
+                            class="text-blue-600 text-sm hover:underline text-center">
+                                Voir détails
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

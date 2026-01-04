@@ -90,4 +90,27 @@ class Reservation
     }
 
 
+    public static function compterReservations(): int
+    {
+        $sql = "SELECT COUNT(*) as total FROM reservation";
+        $stmt = Database::getInstance()->getConnexion()->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return (int)$result['total'];
+    }
+
+    public static function vehiculeLePlusReserve(): ?array
+    {
+        $sql = "SELECT v.*, COUNT(r.id_vehicule) AS nb_reservations
+                FROM reservation r
+                JOIN vehicule v ON r.id_vehicule = v.id_vehicule
+                GROUP BY r.id_vehicule
+                ORDER BY nb_reservations DESC
+                LIMIT 1";
+
+        $stmt = Database::getInstance()->getConnexion()->query($sql);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result ?: null;
+    }
+
+
 }
