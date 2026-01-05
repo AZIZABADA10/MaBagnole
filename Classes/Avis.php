@@ -7,6 +7,7 @@ use PDO;
 
 class Avis
 {
+
     public static function ajouterAvis(int $idVehicule,int $idUser,string $commentaire): bool
     {
         $sql = "INSERT INTO avis (id_utilisateur, id_vehicule, commentaire, date_avis)
@@ -21,10 +22,11 @@ class Avis
         ]);
     }
 
+
     public static function modifierAvis(int $idVehicule,int $idUser,string $commentaire): bool 
     {
         $sql = "UPDATE avis 
-                SET commentaire = :commentaire, date_avis = NOW()
+                SET commentaire = :commentaire, date_avis = NOW(), deleted_at = NULL
                 WHERE id_utilisateur = :user AND id_vehicule = :vehicule";
 
         $stmt = Database::getInstance()->getConnexion()->prepare($sql);
@@ -36,9 +38,11 @@ class Avis
         ]);
     }
 
+
     public static function supprimerAvis(int $idVehicule, int $idUser): bool
     {
-        $sql = "DELETE FROM avis 
+        $sql = "UPDATE avis 
+                SET deleted_at = NOW()
                 WHERE id_utilisateur = :user AND id_vehicule = :vehicule";
 
         $stmt = Database::getInstance()->getConnexion()->prepare($sql);
@@ -54,7 +58,7 @@ class Avis
         $sql = "SELECT a.*, u.nom 
                 FROM avis a
                 JOIN utilisateur u ON u.id_utilisateur = a.id_utilisateur
-                WHERE a.id_vehicule = :vehicule
+                WHERE a.id_vehicule = :vehicule AND a.deleted_at IS NULL
                 ORDER BY a.date_avis DESC";
 
         $stmt = Database::getInstance()->getConnexion()->prepare($sql);
@@ -63,10 +67,13 @@ class Avis
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+
     public static function avisUtilisateur(int $idVehicule,int $idUser): ?array 
     {
         $sql = "SELECT * FROM avis
-                WHERE id_utilisateur = :user AND id_vehicule = :vehicule";
+                WHERE id_utilisateur = :user 
+                AND id_vehicule = :vehicule
+                AND deleted_at IS NULL";
 
         $stmt = Database::getInstance()->getConnexion()->prepare($sql);
         $stmt->execute([
