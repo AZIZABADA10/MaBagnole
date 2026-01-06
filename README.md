@@ -4,7 +4,7 @@
 **MaBagnole** est une application web de gestion de location de voitures.  
 Elle permet aux **clients** de consulter, rechercher et réserver des véhicules en ligne, et aux **administrateurs** de gérer efficacement les véhicules, catégories, réservations et avis.
 
-Ce projet a été réalisé dans le cadre de la formation **Développeur Web et Web Mobile (2023)**.
+Ce projet a été réalisé dans le cadre de la formation **Développeur Web et Web Mobile (2026) a YouCode | UM6P**.
 
 ---
 
@@ -109,4 +109,3 @@ Ces diagrammes ont permis de structurer le projet avant la phase de développeme
 
 ## Réalisé par
 - **Nom :** Aziz Abada
-- **Année :** 2025 – 2026
